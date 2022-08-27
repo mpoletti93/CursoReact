@@ -3,6 +3,7 @@ import Logo from "../Imagenes/Logo.jpg"
 import CartWidget from "./CartWidget"
 import ItemList from "./ItemListContainer"
 
+const items = "4"
 const Navvar = () => {
     return (
 <div className="container">
