@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const ItemList = () => {
+function ItemList  () {
     return (
 <h1> 4</h1>
     )
