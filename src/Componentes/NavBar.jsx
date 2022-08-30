@@ -20,7 +20,7 @@ const Navvar = () => {
                 </ul>
             </div>
                 <CartWidget />
-                <ItemList />
+                <ItemList greeting="4" />
     </nav>
 </div>
     )

@@ -1,9 +1,9 @@
 import React from "react";
 
 
-function ItemList  () {
+const ItemList = (props) => {
     return (
-<h1> 4</h1>
+<h1> {props.greeting}</h1>
     )
 }
 
