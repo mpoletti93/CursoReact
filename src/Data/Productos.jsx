@@ -1,3 +1,4 @@
+/*
 export let productosJson = [
     {
     id: 1,
@@ -45,3 +46,4 @@ export let productosJson = [
     descripcion: "Los primeros aromas que impactan en la nariz recuerdan a fruta madura de carozo (durazno) con un toque de vainilla, proveniente de la crianza en roble.",
     img: "https://www.espaciovino.com.ar/media/default/0001/62/thumb_61971_default_small.jpeg"
 }]
+*/

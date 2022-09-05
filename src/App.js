@@ -4,6 +4,7 @@ import Header from './Componentes/Header';
 import Item from './Componentes/ItemList';
 import ItemCount from './Componentes/ItemCount';
 import Navvar from './Componentes/NavBar';
+import ItemListContainer from './Componentes/ItemListContainer';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
     <Navvar />
       <h1>HOLA MUNDO</h1>
       <h2> Esto es un H2 01</h2>
-      <ItemCount />
+      <ItemListContainer />
     <Footer />
   </div>
   );

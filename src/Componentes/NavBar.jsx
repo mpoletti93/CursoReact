@@ -21,7 +21,6 @@ const Navvar = () => {
                 </ul>
             </div>
                 <CartWidget />
-                <ItemListContainer />
     </nav>
 </div>
     )
