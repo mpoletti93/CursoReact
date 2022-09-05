@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../Imagenes/Logo.jpg"
 import CartWidget from "./CartWidget"
+import ItemListContainer from "./ItemListContainer";
 import ItemList from "./ItemListContainer"
 
 const items = "4"
@@ -20,7 +21,7 @@ const Navvar = () => {
                 </ul>
             </div>
                 <CartWidget />
-                <ItemList greeting="4" />
+                <ItemListContainer />
     </nav>
 </div>
     )

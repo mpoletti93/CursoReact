@@ -1,6 +1,7 @@
 import './App.css';
 import Footer from './Componentes/Footer';
 import Header from './Componentes/Header';
+import Item from './Componentes/ItemList';
 import ItemCount from './Componentes/ItemCount';
 import Navvar from './Componentes/NavBar';
 
