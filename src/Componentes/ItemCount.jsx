@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-
+//import React from "react";
+//import { useState } from "react";
+/*
 const ItemCount = ({stock, initial, onAdd}) => {
     const [cantidad, setCantidad] = useState(initial); //1
     const [itemStock, setItemStock] = useState(stock); //5
@@ -43,6 +43,38 @@ const ItemCount = ({stock, initial, onAdd}) => {
             </div>            
         </div>   
     )
+};
+
+export default ItemCount;
+*/
+
+import React, { useState } from 'react';
+
+const ItemCount = ({ stock, initial }) => {
+    const [count, setCount] = useState(initial);
+
+    const sumar = () => {
+        count < stock && setCount(count + 1);
+    };
+
+    const restar = () => {
+        count > initial && setCount(count - 1);
+    };
+
+    return (
+        <div className="container-counter">
+            <div className="container-btn">
+                <button className="btn-counter" onClick={sumar}>
+                    +
+                </button>
+                <p style={{ fontSize: '24px' }}>{count} </p>
+                <button className="btn-counter" onClick={restar}>
+                    -
+                </button>
+            </div>
+            <button className="btn-add">Agregar al carrito</button>
+        </div>
+    );
 };
 
 export default ItemCount;
