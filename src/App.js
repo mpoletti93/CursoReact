@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom" ;
+import {Routes, Route} from "react-router-dom" ;
 import Footer from './Componentes/Footer';
 import Header from './Componentes/Header';
 import Item from './Componentes/ItemList';
@@ -7,6 +7,7 @@ import ItemCount from './Componentes/ItemCount';
 import Navvar from './Componentes/NavBar';
 import ItemListContainer from './Componentes/ItemListContainer';
 import ItemDetailContainer from './Componentes/ItemDetailContainer';
+import Cart from './Componentes/Cart';
 
 
 function App() {
@@ -14,10 +15,11 @@ function App() {
   <div className='container-fluid'>
     <Header />
     <Navvar />
-      <h1>HOLA MUNDO</h1>
-      <h2> Esto es un H2 01</h2>
-      <ItemListContainer />
-      <ItemDetailContainer />
+    <Routes>
+            <Route path="/" element={<ItemListContainer/>}/>
+            <Route path="/categoria/:categoria" element={<ItemListContainer/>}/>
+            <Route  path="/item/:slug" element={<ItemDetailContainer/>}/>
+      </Routes>
     <Footer />
   </div>
   );

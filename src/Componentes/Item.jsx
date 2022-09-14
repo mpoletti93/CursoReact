@@ -1,4 +1,5 @@
 import React from "react";
+import ItemDetail from "./ItemDetail";
 
 const Item = ({nombre, imagen, precio}) => {
     return (
@@ -7,7 +8,7 @@ const Item = ({nombre, imagen, precio}) => {
             <div className="card-body">
                 <h5 className="card-title text-center"><b>{nombre}</b></h5>
                 <p className="card-text text-center">${precio}</p>
-                <button>Ver detalles</button>
+               <ItemDetail />
             </div>
         </div>
     )
