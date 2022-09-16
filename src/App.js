@@ -9,7 +9,7 @@ function App () {
 
         <BrowserRouter>
             <NavBar/>
-            <ItemListContainer greeting="TuVinito" />
+
             <Main greeting="TuVinito" />
             <Footer/>
         </BrowserRouter>

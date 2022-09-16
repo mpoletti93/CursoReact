@@ -6,11 +6,7 @@ import { Routes, Route} from "react-router-dom";
 
 const Main = (props) => {
     return (
-    <>
-    <main className="container">  
-        <div className="banner w-100 vh-100">
-            <h2 className="txtBanner">{props.greeting}</h2>
-        </div>        
+    <main className="container">      
         <br/>
         <Routes>
             <Route path="/" element={<ItemListContainer/>}/>
@@ -19,7 +15,6 @@ const Main = (props) => {
             <Route  path="/item/:slug" element={<ItemDetailContainer/>}/>
         </Routes>
     </main>
-    </>
     )
 }
 

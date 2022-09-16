@@ -8,9 +8,8 @@ const ItemCount = (props) => {
     const sumarCantidad = () => {
         setCount(previousCount => previousCount + 1);
     }
-    const agregarProducto = () => {
+const agregarProducto = () => {
         if (props.stock < count) {
-        
         } else {
             agregar();
         }
