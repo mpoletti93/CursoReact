@@ -1,28 +1,19 @@
-import './App.css';
-import {Routes, Route} from "react-router-dom" ;
-import Footer from './Componentes/Footer';
-import Header from './Componentes/Header';
-import Item from './Componentes/ItemList';
-import ItemCount from './Componentes/ItemCount';
-import Navvar from './Componentes/NavBar';
-import ItemListContainer from './Componentes/ItemListContainer';
-import ItemDetailContainer from './Componentes/ItemDetailContainer';
-import Cart from './Componentes/Cart';
+import NavBar from "./Componentes/NavBar.jsx";
+import ItemListContainer from "./Componentes/ItemListContainer";
+import Main from "./Componentes/Main";
+import Footer from "./Componentes/Footer";
+import { BrowserRouter } from "react-router-dom";
 
+function App () {
+    return (
 
-function App() {
-  return (
-  <div className='container-fluid'>
-    <Header />
-    <Navvar />
-    <Routes>
-            <Route path="/" element={<ItemListContainer/>}/>
-            <Route path="/categoria/:categoria" element={<ItemListContainer/>}/>
-            <Route  path="/item/:slug" element={<ItemDetailContainer/>}/>
-      </Routes>
-    <Footer />
-  </div>
-  );
+        <BrowserRouter>
+            <NavBar/>
+            <ItemListContainer greeting="TuVinito" />
+            <Main greeting="TuVinito" />
+            <Footer/>
+        </BrowserRouter>
+    )
 }
 
-export default App;
+export default App

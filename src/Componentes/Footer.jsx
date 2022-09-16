@@ -2,11 +2,13 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div>
-        <hr></hr>
-        <h1> Footer!!</h1>
+    <footer>
+        <div className="firmaBrand">
+        <h2>TuVinito</h2>
+        <p className="txtBrand">Venta de Vinos De Excelencia</p>
         </div>
+    </footer>
     )
 }
 
-export default Footer;
+export default Footer

@@ -1,17 +1,14 @@
 import React from "react";
-import ItemDetail from "./ItemDetail";
+import { Link } from "react-router-dom";
 
-const Item = ({nombre, imagen, precio}) => {
+const Item = (props) => {
     return (
-        <div className="card">
-            <img src={imagen} className="card-img-top" alt={nombre} />
-            <div className="card-body">
-                <h5 className="card-title text-center"><b>{nombre}</b></h5>
-                <p className="card-text text-center">${precio}</p>
-               <ItemDetail />
-            </div>
-        </div>
-    )
-}
-
+        <div className="cardProductos">
+        <Link to={/item/ + props.slug}><img className="imgCard" src= {props.img} alt=""/></Link>
+        <p className="nameCard"> {props.nombre}</p><br/>
+        <p className="priceCard">  {"$" + props.precio}</p><br/>
+        <button className="btnCard">Comprar</button>
+    </div>
+        )
+    }
 export default Item;

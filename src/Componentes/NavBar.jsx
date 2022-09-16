@@ -1,29 +1,27 @@
 import React from "react";
-import Logo from "../Imagenes/Logo.jpg"
-import CartWidget from "./CartWidget"
-import ItemListContainer from "./ItemListContainer";
-import ItemList from "./ItemListContainer"
+import CartWidget from "./CartWidget";
+import { Link, NavLink} from "react-router-dom";
 
-const items = "4"
-const Navvar = () => {
+function NavBar() {
     return (
-<div className="container">
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand"><img src={Logo} width="150" alt="Guapasbb"/></a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="">Home </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="">Productos</a>
-                    </li>
-                </ul>
-            </div>
-                <CartWidget />
-    </nav>
-</div>
-    )
+<header>
+    <h1><Link to="/">TuVinito</Link></h1>
+        <nav className="nav">
+            <input type="checkbox" id="nav"></input>
+            <label htmlFor="nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>   
+            <ul className="menu"> 
+                <li><NavLink to="/categoria/tinto">Tintos</NavLink></li>
+                <li><NavLink to="/categoria/blanco">Blancos</NavLink></li>
+                <li><NavLink to="/categoria/rosado">Rosados</NavLink></li>
+                <li><NavLink to="carrito"><CartWidget/></NavLink></li>
+            </ul>
+        </nav>
+</header>
+)
 }
 
-export default Navvar;
+export default NavBar;

@@ -1,34 +1,42 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import ItemCount from "./ItemCount";
+import productosJson from "../Data/Productos";
 import ItemList from "./ItemList";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = () => {
-    const [items, setItems] = useState([]);
+const ItemListContainer = (props) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error,setError] = useState(false);
+    const { categoria } = useParams();
+
     useEffect(() => {
-        const productos = [
-            {"id":1, "nombre":"Pantalon", "descripcion":"Esto es un pantalon.",  "imagen":"pantalon", "precio":1500},
-            {"id":2, "nombre":"Camisa", "descripcion":"Esto es una camisa.", "imagen":"camisa",  "precio":5600},
-            {"id":3, "nombre":"Top", "descripcion":"esto es un top.", "imagen":"Top", "precio":1700},
-        ];
-
-        const getProductos = new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(productos);
-            }, 2000);
+        setLoading(true);
+        const getProducts = () => {
+        return new Promise ((res, rej) => {
+        setTimeout(() => res(productosJson.products),2000);
         });
-
-        getProductos.then((respuesta) => {
-            setItems(respuesta);
-        });
-    }, []);
-
-    return (
-        <div className="container">
-            <ItemList items={items} />
+        }
+        getProducts()
+        .then ((res) => {
+            if (categoria !== undefined) {
+            const productsFiltered = productosJson.products.filter(product => product.categoria === categoria)
+            setProducts (productsFiltered)
+            } else {
+            setProducts(productosJson.products);
+            }
+        })
+        .catch ((rej) =>{
+            setError (true);
+        })
+        .finally (() => setLoading(false));
+    }, [categoria]);
+return (
+        <div>
+            {loading ? <h2>Cargando, por favor aguarde</h2> : null}
+            {error ? <h2>Error, intente nuevamente</h2> : null}
+            <ItemList products={products}/>
         </div>
-    )
+    );
 }
-
 export default ItemListContainer;

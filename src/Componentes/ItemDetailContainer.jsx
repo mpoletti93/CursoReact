@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { productos } from '../Data/Productos';
-import ItemDetail from './ItemDetail';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ItemDetail from "./ItemDetail";
+import productosJson from "../Data/Productos";
 
-const ItemDetailContainer = () => {
-    const [item, setItem] = useState({});
+const ItemDetailContainer = (props) => {
+    const [object, setObject] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error,setError] = useState(false);
+    const { slug } = useParams();
 
     useEffect(() => {
-        const getProduct = () =>
-            new Promise((res, rej) => {
-                const product = productos.find((prod) => prod.id === 1);
-                setTimeout(() => {
-                    res(product);
-                }, 500);
+        setLoading(true);
+        const getProducts = () => {
+            return new Promise ((res, rej) => {
+                setTimeout(() => res(productosJson.products),100);
             });
+        }
 
-        getProduct()
-            .then((info) => {
-                setItem(info);
+        getProducts()
+        .then((res) => {
+            let result = productosJson.products.find(product => {
+                return product.slug === slug;
             })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+            setObject(result);
+        })
+        .catch ((rej) =>{
+            setError (true);
+        })
+        .finally (() => setLoading(false));
+    }, 
+    []);
     return (
-        <div style={{ minHeight: '70vh' }}>
-            <ItemDetail item={item} />
-        </div>
-    );
-};
-
+        <div>
+        {loading ? <h2>Cargando, por favor aguarde</h2> : null}
+        {error ? <h2>Error, intente nuevamente</h2> : null}
+        <ItemDetail object={object}/>
+    </div>
+            );
+}
 export default ItemDetailContainer;
