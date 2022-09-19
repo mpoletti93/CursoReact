@@ -1,10 +1,16 @@
-import React from "react";
-import Cart from "../Imagenes/cart.png"
+import { Badge } from '@mui/material';
+import { CartContext } from "./CartContext";
+import { useContext } from 'react';
 
-function CartWidget ()  {
+const CartWidget = () =>  {
+    const useCartContext = useContext(CartContext);
+    const { prodsTotal } = useCartContext;
+    
     return(
-        <img  className="nav-item" src={Cart} width="100" alt="Cart" />
-    );
-};
-
-export default CartWidget;
+        <>
+            <Badge badgeContent={prodsTotal} color="info">
+            </Badge>
+        </>
+    )
+}
+export default CartWidget
