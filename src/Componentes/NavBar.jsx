@@ -1,6 +1,7 @@
 import React from "react";
 import CartWidget from "./CartWidget";
 import { Link, NavLink} from "react-router-dom";
+import Button from '@mui/material/Button'
 
 function NavBar() {
     return (
@@ -18,6 +19,7 @@ function NavBar() {
                 <li><NavLink to="/categoria/blanco">Blancos</NavLink></li>
                 <li><NavLink to="/categoria/rosado">Rosados</NavLink></li>
                 <li><NavLink to="/cart/"><CartWidget/></NavLink></li>
+                <li><Button /> </li>
             </ul>
         </nav>
 </header>
