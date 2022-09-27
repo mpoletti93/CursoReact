@@ -30,6 +30,9 @@ const agregarProducto = () => {
 }
 export default ItemCount;
 */
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 import { useState } from "react";
 const ItemCount = (props) => {
@@ -47,7 +50,7 @@ const ItemCount = (props) => {
     return (
             <div className="contador">
                 <button className="Btn" onClick={restarCantidad} disabled={count === 0}>-</button>
-                <p>{count}</p>
+                <p> {count} </p>
                 <button className="Btn" onClick={sumarCantidad} disabled={count === props.stock}>+</button>
                 <button className="Btn" onClick={addToCart} disabled={count === 0}>Agregar al carrito</button>
             </div> 

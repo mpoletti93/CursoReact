@@ -1,36 +1,28 @@
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import {CartContext} from "./CartContext";
 import ItemCount from "./ItemCount";
-import { cartContext } from "./CartContext";
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom"
 
-const ItemDetail = (props) => {
-    const [ocultarBtn, setOcultarBtn] = useState(true);
-    
-    const useCartContext = useContext(cartContext);
-    const { addToCart } = useCartContext;
-    
-    const onAdd = (activarContador) => {
-        if (activarContador !== undefined) {
-            setOcultarBtn(false);
-            addToCart(props.object, activarContador);
-        }
+const ItemDetails = ({item}) => {
+    const {addItem} = useContext(CartContext);
+    const [counter, setCounter] = useState(0);
+
+    const onAdd = (counter) => {
+        setCounter(counter); 
+        addItem(item, counter);
     }
-    
+
     return (
-        <div className="containerProductDetailed">
-            <div className="dropShadow">
-                <img className="productImg" src= {props.object.img} alt=""/>
-            </div>
-            <div className="productBody dropShadow">
-                <p className="productName"> {props.object.nombre}</p><br/>
-                <p className="productDescription">{props.object.descripcion}</p>
-                <p className="productPrice">  {"$" + props.object.precio}</p><br/>
-                <p className="productStock"> Stock: {props.object.stock}</p>
-                <ItemCount initial={1} stock={props.object.stock} onAdd={onAdd} />
-                { ocultarBtn || <Link to="/cart/" className="btnCount"><button className="Btn">Comprar</button></Link>}
+        <div className="row mb-5">
+            <div className="col-md-6 offset-md-3 text-center color_marron">
+                <img src={"../images/" + item.img} className="img-fluid" alt={item.nombre} />
+                <h1>{item.nombre}</h1>
+                <p>{item.descripcion}</p>
+                <p><b>${item.precio}</b></p>
+                {counter === 0 ? <ItemCount initial={1} stock={item.stock} onAdd={onAdd} /> : <Link to={"/cart"} className="btn fondo_naranja">Finalizar mi Compra</Link>}
             </div>
         </div>
     )
 }
 
-export default ItemDetail
+export default ItemDetails;

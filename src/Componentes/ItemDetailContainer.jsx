@@ -1,41 +1,30 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ItemDetail from "./ItemDetail";
-import productosJson from "../Data/Productos";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import ItemDetails from "./ItemDetail";
+import Loading from "./Loading";
 
-const ItemDetailContainer = (props) => {
-    const [object, setObject] = useState([]);
+const ItemDetailsContainer = () => {
+    const {id} = useParams();
+    const [item, setItem] = useState({});
     const [loading, setLoading] = useState(true);
-    const [error,setError] = useState(false);
-    const { slug } = useParams();
 
     useEffect(() => {
-        setLoading(true);
-        const getProducts = () => {
-            return new Promise ((res, rej) => {
-                setTimeout(() => res(productosJson.products),100);
-            });
-        }
+        const db = getFirestore();
+        const response = doc(db, "Productos", id);
+        getDoc(response).then((snapShot) => {
+            if (snapShot.exists()) {
+                setItem({id:snapShot.id, ...snapShot.data()});
+                setLoading(false);
+            }            
+        });
+    }, [id]);
 
-        getProducts()
-        .then((res) => {
-            let result = productosJson.products.find(product => {
-                return product.slug === slug;
-            })
-            setObject(result);
-        })
-        .catch ((rej) =>{
-            setError (true);
-        })
-        .finally (() => setLoading(false));
-    }, 
-    []);
     return (
-        <div>
-        {loading ? <h2>Cargando, por favor aguarde</h2> : null}
-        {error ? <h2>Error, intente nuevamente</h2> : null}
-        <ItemDetail object={object}/>
-    </div>
-            );
+        <div className="container">
+            {loading ? <Loading /> : <ItemDetails item={item} />}
+        </div>
+    )
 }
-export default ItemDetailContainer;
+
+export default ItemDetailsContainer;

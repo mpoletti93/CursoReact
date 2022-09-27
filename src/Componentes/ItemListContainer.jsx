@@ -1,42 +1,31 @@
-import React from "react";
-import productosJson from "../Data/Productos";
-import ItemList from "./ItemList";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import ItemList from "./ItemList";
+import Loading from "./Loading";
 
-const ItemListContainer = (props) => {
-    const [products, setProducts] = useState([]);
+const ItemListContainer = () => {
+    const {id} = useParams();
+    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error,setError] = useState(false);
-    const { categoria } = useParams();
 
     useEffect(() => {
-        setLoading(true);
-        const getProducts = () => {
-        return new Promise ((res, rej) => {
-        setTimeout(() => res(productosJson.products),2000);
-        });
-        }
-        getProducts()
-        .then ((res) => {
-            if (categoria !== undefined) {
-            const productsFiltered = productosJson.products.filter(product => product.categoria === categoria)
-            setProducts (productsFiltered)
-            } else {
-            setProducts(productosJson.products);
+        const db = getFirestore();
+        const itemsCollection = collection(db, "Burger-King");
+        const queryItems = id ? query(itemsCollection, where("categoria", "==", id)) : itemsCollection;
+        getDocs(queryItems).then((snapShot) => {
+            if (snapShot.size > 0) {
+                setItems(snapShot.docs.map(item => ({id:item.id, ...item.data()})));
+                setLoading(false);
             }
-        })
-        .catch ((rej) =>{
-            setError (true);
-        })
-        .finally (() => setLoading(false));
-    }, [categoria]);
-return (
-        <div>
-            {loading ? <h2>Cargando, por favor aguarde</h2> : null}
-            {error ? <h2>Error, intente nuevamente</h2> : null}
-            <ItemList products={products}/>
+        });
+    }, [id]);
+
+    return (
+        <div className="container">
+            {loading ? <Loading /> : <ItemList items={items} />}  
         </div>
-    );
+    )
 }
+
 export default ItemListContainer;
