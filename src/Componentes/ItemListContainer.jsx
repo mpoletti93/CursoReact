@@ -1,42 +1,59 @@
-import React from "react";
-import productosJson from "../Data/Productos";
 import ItemList from "./ItemList";
+import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { query, where, getDocs, collection, getFirestore  } from "firebase/firestore";
 
 const ItemListContainer = (props) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error,setError] = useState(false);
     const { categoria } = useParams();
-
+    
     useEffect(() => {
-        setLoading(true);
-        const getProducts = () => {
-        return new Promise ((res, rej) => {
-        setTimeout(() => res(productosJson.products),2000);
-        });
-        }
-        getProducts()
-        .then ((res) => {
-            if (categoria !== undefined) {
-            const productsFiltered = productosJson.products.filter(product => product.categoria === categoria)
-            setProducts (productsFiltered)
-            } else {
-            setProducts(productosJson.products);
-            }
+        const db = getFirestore();
+      if (categoria !== undefined) {
+        const filteredDocuments = getDocs(query(collection(db, "Productos"), where("categoria", "==", categoria)));
+        filteredDocuments.then((resp) => {
+            setProducts(resp.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id
+            })));
         })
-        .catch ((rej) =>{
-            setError (true);
+        
+        .catch ((rej) => {
+        setError (true);
         })
-        .finally (() => setLoading(false));
-    }, [categoria]);
-return (
-        <div>
-            {loading ? <h2>Cargando, por favor aguarde</h2> : null}
-            {error ? <h2>Error, intente nuevamente</h2> : null}
-            <ItemList products={products}/>
-        </div>
-    );
+        
+        .finally (() => { 
+        setLoading(false);
+        })
+        
+    } else {
+        const documents = getDocs(collection(db, "Productos"));
+        documents.then((resp) => {
+            setProducts(resp.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id
+            })));
+        })
+        
+        .catch ((rej) => {
+
+        setError (true);
+        })
+        
+        .finally (() => {
+        setLoading(false);
+        })
+    }
+}, [categoria])
+    
+    return (
+        <>
+        {loading ? < CircularProgress color="inherit"/> : <ItemList products={products}/>}
+        {error ? <h2>Error, intente nuevamente</h2> : null}
+        </>
+    )
 }
-export default ItemListContainer;
+export default ItemListContainer

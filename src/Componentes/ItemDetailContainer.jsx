@@ -1,41 +1,38 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import productosJson from "../Data/Productos";
+import CircularProgress from '@mui/material/CircularProgress';
+import { query, where, getDocs, collection, getFirestore } from "firebase/firestore";
+
 
 const ItemDetailContainer = (props) => {
-    const [object, setObject] = useState([]);
+    const [object, setObject] = useState({});
     const [loading, setLoading] = useState(true);
     const [error,setError] = useState(false);
     const { slug } = useParams();
-
+    
     useEffect(() => {
-        setLoading(true);
-        const getProducts = () => {
-            return new Promise ((res, rej) => {
-                setTimeout(() => res(productosJson.products),100);
-            });
-        }
+        const db = getFirestore();
+        const filteredDocuments = getDocs(query(collection(db, "Productos"), where("slug", "==", slug)));
 
-        getProducts()
-        .then((res) => {
-            let result = productosJson.products.find(product => {
-                return product.slug === slug;
-            })
-            setObject(result);
+        filteredDocuments.then((resp) => {
+            setObject(resp.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id
+            }))[0]);
         })
+
         .catch ((rej) =>{
             setError (true);
         })
         .finally (() => setLoading(false));
-    }, 
-    []);
+    }, [slug]);
+    
     return (
-        <div>
-        {loading ? <h2>Cargando, por favor aguarde</h2> : null}
-        {error ? <h2>Error, intente nuevamente</h2> : null}
-        <ItemDetail object={object}/>
-    </div>
-            );
+        <>
+            {loading ? < CircularProgress color="primary"/> : <ItemDetail key={object.id} object={object} />}
+            {error ? <h2>Error, intente nuevamente</h2> : null}
+        </>
+    )
 }
-export default ItemDetailContainer;
+export default ItemDetailContainer

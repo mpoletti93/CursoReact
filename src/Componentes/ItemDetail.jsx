@@ -15,12 +15,13 @@ const ItemDetail = (props) => {
             addToCart(props.object, activarContador);
         }
     }
-    
+
     return (
         <div className="containerProductDetailed">
             <div className="dropShadow">
                 <img className="productImg" src= {props.object.img} alt=""/>
             </div>
+            
             <div className="productBody dropShadow">
                 <p className="productName"> {props.object.nombre}</p><br/>
                 <p className="productDescription">{props.object.descripcion}</p>
