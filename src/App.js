@@ -9,7 +9,7 @@ function App () {
         <CartProvider>
             <BrowserRouter>
                 <NavBar/>
-                <Main greeting="OnlyWines" />
+                <Main greeting="TuVinito" />
                 <Footer/>
             </BrowserRouter>
         </CartProvider>

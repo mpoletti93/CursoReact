@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -20,6 +20,8 @@ appId: "1:1073772961758:web:9f6365f63f2e5470d1874f"
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
