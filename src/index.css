@@ -44,11 +44,7 @@ nav {
   padding-left: 0;
   margin-right: 20px;
 }
-a {
-  list-style: none;
-  text-decoration: none;
-  color:red;
-}    
+
 
 .menu {
   position: relative;
@@ -182,3 +178,61 @@ input[type=checkbox] {
     margin: 1rem 0;
     box-shadow: 3px 5px 6px rgba(0, 0, 0, .5);
 }
+
+.card-text {
+  justify-content: center;
+  text-align: center;
+}
+
+#seccionCarrito{
+  text-align: center;
+  margin: 2rem;
+}
+
+#containerProdsCarrito{
+  padding: 1rem;
+}
+
+.prodsCarrito{
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin: 1rem 5rem;
+}
+.imgProd {
+          height: 215px;
+      }        
+      .spanPrecio{
+          display: flex;
+          align-items: center;
+      }        
+      .h3Precio{
+          margin: 0 0.5rem;
+      }    
+
+      #containerForm{
+        text-align: center;
+        margin: 3rem 0;
+    }
+    
+    .h2Form {
+        margin: 2rem 0;
+    }
+    .itemForm{
+        margin: 0 0.5rem !important;
+    }
+    
+    .textoForm{
+        margin: 2rem 0;
+    }
+    
+    .h3Form{
+        margin: 0.5rem 0;
+    }
+    
+    .containerBtnForm {
+        margin: 1rem 0;
+    }
+        .btnForm{
+            margin: 1rem !important;
+        }

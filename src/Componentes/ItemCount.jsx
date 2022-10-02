@@ -45,10 +45,10 @@ const ItemCount = (props) => {
     }
     
     return (
-            <div className="contador">
-                <button className="Btn" onClick={restarCantidad} disabled={count === 0}>-</button>
-                <p>{count}</p>
+            <div className="card">
                 <button className="Btn" onClick={sumarCantidad} disabled={count === props.stock}>+</button>
+                <p className="card-text">{count}</p>
+                <button className="Btn" onClick={restarCantidad} disabled={count === 0}>-</button>
                 <button className="Btn" onClick={addToCart} disabled={count === 0}>Agregar al carrito</button>
             </div> 
     )

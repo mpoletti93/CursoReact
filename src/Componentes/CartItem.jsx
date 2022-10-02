@@ -13,7 +13,7 @@ const CartItem = (props) => {
                 <span><p>${props.item.product.precio} x {props.item.count} unidades</p></span>
                 <button onClick={() => deleteFromCart(props.item.product)} >Eliminar producto</button>
             </div>
-            <span className="spanPrecio"><br/><h3 className="h3Precio">Total:</h3> <p>${props.item.product.precio * props.item.count}</p></span>
+
         </div>
     )
 }

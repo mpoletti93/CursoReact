@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 function NavBar() {
     return (
 <header>
-    <h1><Link to="/">TuVinito</Link></h1>
+    <h1 className="navbar-brand mb-0 h1"><Link to="/">TuVinito</Link></h1>
         <nav className="nav">
             <input type="checkbox" id="nav"></input>
             <label htmlFor="nav">
